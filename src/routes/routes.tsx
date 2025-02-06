@@ -4,11 +4,16 @@ import App from "../App";
 import Register from "../pages/Register";
 import { routesGenerator } from "../lib/routesGenerator";
 import { adminPaths } from "./admin.routes";
+import Login from "../pages/student/Login";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
   },
   {
     path: "/admin",

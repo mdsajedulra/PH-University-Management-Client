@@ -7,8 +7,6 @@ type TAuthState = {
     token: null | string
 }
 
-
-
 const initialState: TAuthState = {
     user: null, 
     token: null
@@ -23,8 +21,8 @@ const authSlice = createSlice({
             state.token = token;
         },
         logout: (state) =>{
-state.user = null;
-state.token = null;
+            state.user = null;
+            state.token = null;
         }
     }
 })
