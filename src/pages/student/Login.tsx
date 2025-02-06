@@ -1,5 +1,8 @@
-import { useForm, SubmitHandler } from "react-hook-form"
+import { useForm } from "react-hook-form"
 import { useLoginMutation } from "../../redux/api/authApi"
+import { useAppDispatch } from "../../redux/hooks"
+import { setUser } from "../../redux/features/auth/authSlice"
+import { verifyToken } from "../../utils/verifyToken"
 
 
 type Inputs = {
@@ -9,10 +12,16 @@ type Inputs = {
 
 
 export default function Login() {
+
+
+
+  const dispatch = useAppDispatch()
+
+
+
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<Inputs>({
     defaultValues: {
@@ -24,17 +33,24 @@ export default function Login() {
 
   const [login, {data, error}] = useLoginMutation()
   
-  console.log("data", data)
-  console.log("error", error);
+
+  // console.log(data);
   
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
+  const onSubmit = async (data:{   userId: string,
+    password: string}) => {
     const userInfo = {
       id: data.userId, 
       password: data.password,
     }
-    login(userInfo)
+    
+   const res= await login(userInfo).unwrap()
+   const user = verifyToken(res.data.accessToken)
+   console.log(user)
+   dispatch(setUser({user: user, token: res.data.accessToken}))
+   console.log(res);
+    
   }
-  console.log(watch("userId")) // watch input value by passing the name of it
+ 
 
 
   return (
