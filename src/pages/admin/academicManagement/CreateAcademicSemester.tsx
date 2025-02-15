@@ -26,7 +26,7 @@ const CreateAcademicSemester = () => {
     };
     console.log(semesterData);
   };
-
+console.log("huraira valo chele");
   return (
     <Flex justify="center" align="center">
       <Col span={6}>
