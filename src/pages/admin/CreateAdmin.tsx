@@ -1,4 +1,5 @@
-import { useGetAllSemestersQuery } from "../../redux/features/academicSemester/academicSemester";
+import { useGetAllSemestersQuery } from "../../redux/features/admin/academicManagement.api";
+
 
 
 const CreateAdmin = () => {
